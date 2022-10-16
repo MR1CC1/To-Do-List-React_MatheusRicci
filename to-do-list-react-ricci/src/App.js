@@ -9,7 +9,7 @@ function App() {
   let [list, setList] = useState([]);
   let [newTask, setNewtask] = useState("");
 
-  const [checked, setChecked] = useState([true, false]);
+  const [checked, setChecked] = useState(false);
 
   const handleChange = (event) => {
     setChecked(event.target.checked);
