@@ -1,24 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+
 
 function App() {
+
+  let [list, setList] = useState([]);
+  let [newTask, setNewtask] = useState("");
+
+  function addNewTask() {
+    setList([...list, newTask]);
+    setNewtask("");
+  }
+
+  function delTask(index) {
+    let arrayTemp = [...list];
+    arrayTemp.splice(index, 1)
+    setList(arrayTemp)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <input value={newTask} onChange={value =>
+        setNewtask(value.target.value)} type="text" placeholder="Tarefa" />
+      <button onClick={() => addNewTask()}>Add</button>
+      <ul>
+        {list.map((task, index) => (
+          <li>
+            {task}
+            <button onClick={() => delTask(index)}>X</button>
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
 
